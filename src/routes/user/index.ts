@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify";
-import S from "fluent-json-schema";
+import { USER_INFO } from "../../types";
 
 const schema = {
-    response: { 200: S.object().prop("username", S.string().required()) },
+    response: { 200: USER_INFO },
 };
 
 export default async function user(fastify: FastifyInstance) {
