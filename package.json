@@ -1,31 +1,41 @@
 {
   "name": "fastify-solutions",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
     "serve": "node ./dist/server.js",
-    "dev": "NODE_ENV=development npm-run-all build serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "NODE_ENV=development ts-node-dev --respawn server.ts",
+    "test": "tap --ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^17.0.40",
+    "@types/tap": "^15.0.7",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
     "eslint": "^8.17.0",
     "eslint-plugin-sql": "^2.1.0",
-    "npm-run-all": "^4.1.5",
     "prettier": "^2.6.2",
+    "tap": "^16.2.0",
     "typescript": "^4.7.3"
   },
   "dependencies": {
     "fastify": "^3.29.0",
     "fluent-json-schema": "^3.1.0",
-    "pino-pretty": "^8.0.0"
+    "pino-pretty": "^8.0.0",
+    "ts-node-dev": "^2.0.0"
+  },
+  "tap": {
+    "check-coverage": false,
+    "branches": 70,
+    "lines": 70,
+    "functions": 70,
+    "statements": 70,
+    "coverage-report": ["text-summary", "html"],
+    "no-browser": true
   }
 }

@@ -9,8 +9,8 @@ export default function buildServer() {
         reply.send({ hello: "world" });
     });
 
-    server.register(import("./routes/users.js"));
-    server.register(import("./routes/login.js"));
+    server.register(import("./routes/users"));
+    server.register(import("./routes/login"));
 
     server.log.info("Starting...");
 
