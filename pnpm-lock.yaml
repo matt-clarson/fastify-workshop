@@ -10,6 +10,7 @@ specifiers:
   eslint: ^8.17.0
   eslint-plugin-sql: ^2.1.0
   fastify: ^3.29.0
+  fastify-plugin: ^3.0.1
   fluent-json-schema: ^3.1.0
   pino-pretty: ^8.0.0
   prettier: ^2.6.2
@@ -21,6 +22,7 @@ dependencies:
   '@fastify/jwt': 5.0.1
   env-schema: 5.0.0
   fastify: 3.29.0
+  fastify-plugin: 3.0.1
   fluent-json-schema: 3.1.0
   pino-pretty: 8.0.0
   ts-node-dev: 2.0.0_fvkldoeufjjq5mlpfdkzhuqzdy

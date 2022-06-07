@@ -10,7 +10,10 @@ export default function buildServer(config: Config) {
         reply.send({ hello: "world" });
     });
 
-    server.register(import("@fastify/jwt"), { secret: config.SECRET });
+    server.register(import("./plugins/authentication"), {
+        secret: config.SECRET,
+    });
+    server.register(import("./routes/user"));
     server.register(import("./routes/users"));
     server.register(import("./routes/login"));
 
