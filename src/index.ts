@@ -1,4 +1,6 @@
 import { fastify } from "fastify";
+import autoload from "@fastify/autoload";
+import path from "node:path";
 import type { Config } from "../config";
 
 export default function buildServer(config: Config) {
@@ -6,16 +8,14 @@ export default function buildServer(config: Config) {
         logger: { prettyPrint: config.NODE_ENV === "development" },
     });
 
-    server.get("/", (_request, reply) => {
-        reply.send({ hello: "world" });
+    server.register(autoload, {
+        dir: path.join(__dirname, "./plugins"),
+        options: { secret: config.SECRET },
     });
 
-    server.register(import("./plugins/authentication"), {
-        secret: config.SECRET,
+    server.register(autoload, {
+        dir: path.join(__dirname, "./routes"),
     });
-    server.register(import("./routes/user"));
-    server.register(import("./routes/users"));
-    server.register(import("./routes/login"));
 
     server.log.info("Starting...");
 

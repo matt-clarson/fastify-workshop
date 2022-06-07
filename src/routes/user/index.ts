@@ -7,7 +7,7 @@ const schema = {
 
 export default async function user(fastify: FastifyInstance) {
     fastify.get(
-        "/user",
+        "/",
         { schema, onRequest: [fastify.authenticate] },
         (request, reply) => {
             reply.send(request.user);
