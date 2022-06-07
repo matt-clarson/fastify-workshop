@@ -1,14 +1,10 @@
-import { fastify } from "fastify";
+import buildServer from "./src/index.js";
 
-const app = fastify({ logger: true });
+const server = buildServer();
 
-app.get("/", (_request, reply) => {
-    reply.send({ hello: "world" });
-});
-
-app.listen(3000, (err) => {
-    if (err) {
-        app.log.error(err);
-        process.exit(1);
-    }
-});
+try {
+    await server.listen(3000);
+} catch (err) {
+    server.log.error(err);
+    process.exit(1);
+}
