@@ -1,5 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import S from "fluent-json-schema";
+import sql from "@nearform/sql";
 
 type LoginBody = { username: string; password: string };
 const LOGIN_SCHEMA = S.object()
@@ -17,14 +18,27 @@ export default async function postLogin(fastify: FastifyInstance) {
     fastify.post(
         "/login",
         { schema: { body: LOGIN_SCHEMA, response: RESPONSE_SCHEMA } },
-        (request, reply) => {
+        async (request, reply) => {
             const { username, password } = request.body as LoginBody;
 
             request.log.info(
                 `got username ${username} and password ${password}`
             );
 
-            if (username === "Matt" && password === "password") {
+            const q = await fastify.pg.query(
+                sql`SELECT username, password FROM users WHERE username=${username};`
+            );
+            if (q.rowCount !== 1) {
+                reply
+                    .status(401)
+                    .send({ error: "username or password is incorrect" });
+                return;
+            }
+
+            request.log.info(q.rows);
+            const [userInfo] = q.rows;
+
+            if (password === userInfo.password) {
                 reply.send({ token: fastify.jwt.sign({ username }) });
             } else {
                 reply

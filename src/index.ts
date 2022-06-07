@@ -8,6 +8,9 @@ export default function buildServer(config: Config) {
         logger: { prettyPrint: config.NODE_ENV === "development" },
     });
 
+    server.register(import("@fastify/postgres"), {
+        connectionString: config.PG_CONNECTION_STRING,
+    });
     server.register(autoload, {
         dir: path.join(__dirname, "./plugins"),
         options: { secret: config.SECRET },
