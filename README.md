@@ -4,6 +4,11 @@ Following this => https://nearform.github.io/the-fastify-workshop
 
 ```bash
 pnpm install
-pnpm tsc
-node ./dist/server.js
+
+# in dev
+pnpm dev
+
+# in prod
+pnpm build
+pnpm serve
 ```
