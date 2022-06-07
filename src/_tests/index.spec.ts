@@ -2,7 +2,11 @@ import tap from "tap";
 import buildServer from "../index";
 
 tap.test("GET /user", async (t) => {
-    const server = buildServer();
+    const server = buildServer({
+        PORT: 3000,
+        SECRET: "testsecret",
+        NODE_ENV: "development",
+    });
 
     const response = await server.inject({ method: "GET", url: "/users" });
 
