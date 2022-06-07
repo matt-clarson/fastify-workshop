@@ -10,6 +10,7 @@ export default function buildServer() {
     });
 
     server.register(import("./routes/users.js"));
+    server.register(import("./routes/login.js"));
 
     server.log.info("Starting...");
 
