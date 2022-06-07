@@ -1,5 +1,5 @@
 import type { FastifyInstance } from "fastify";
-import { default as S } from "fluent-json-schema";
+import S from "fluent-json-schema";
 
 type LoginBody = { username: string; password: string };
 const LOGIN_SCHEMA = S.object()
